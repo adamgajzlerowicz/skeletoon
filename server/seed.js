@@ -15,6 +15,7 @@ User.sync({ force: true }).then(() => {
         User.create({
             username: 'jh',
             password: hash,
+            email: 'foo.bar.com'
         });
     });
 });

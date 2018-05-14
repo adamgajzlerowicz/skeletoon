@@ -1,5 +1,5 @@
-const { GraphQLServer } = require('graphql-yoga');
-const connection = require('./connection');
+import { GraphQLServer } from 'graphql-yoga';
+import connection from './connection';
 
 
 const sampleItems = [
