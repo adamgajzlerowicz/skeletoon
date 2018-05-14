@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
-// import sequelize from '../index';
+import Sequelize from 'sequelize';
+import connection from '../connection';
 
-const User = {
+const User = connection.define('user', {
     username: {
         type: Sequelize.STRING,
     },
@@ -11,9 +11,6 @@ const User = {
     password: {
         type: Sequelize.STRING,
     },
-};
+});
 
-export {
-	User
-};
-
+export default User;
