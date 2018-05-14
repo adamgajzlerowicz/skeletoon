@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import User from './models/user';
 
-
+// sync resets the db
 User.sync({ force: true }).then(() => {
     bcrypt.hash('dupa', 10, (err, hash) => {
         User.create({
@@ -15,7 +15,7 @@ User.sync({ force: true }).then(() => {
         User.create({
             username: 'jh',
             password: hash,
-            email: 'foo.bar.com'
+            email: 'foo.bar.com',
         });
     });
 });

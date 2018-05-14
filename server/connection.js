@@ -1,4 +1,3 @@
-import { User } from './models/user';
 import Sequelize from 'sequelize';
 
 const DB = process.env.APP_SQL_DB || 'skeletoon';
@@ -19,8 +18,6 @@ connection.authenticate()
         // eslint-disable-next-line
         console.error('Unable to connect to the database:', err);
     });
-
-connection.define('user', User);
 
 export default connection;
 

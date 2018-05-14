@@ -3,7 +3,14 @@
         "airbnb",
         "react-app"
     ],
+    "plugins": [
+        "dependencies"
+    ],
     "rules": {
+        "dependencies/case-sensitive": 1,
+        "dependencies/no-cycles": 1,
+        "dependencies/no-unresolved": 1,
+        "dependencies/require-json-ext": 1,
         "max-len": [
             2,
             124
