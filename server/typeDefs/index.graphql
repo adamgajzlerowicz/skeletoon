@@ -1,6 +1,17 @@
 const typeDefs = `
 type Query {
-  items: [Item!]!
+  items: [Item!]!,
+  users: [User]
+}
+
+type Mutation {
+    createUser(username: String!, email: String, password: String): User
+}
+
+type User {
+  username: String!,
+  email: String!,
+  password: String!
 }
 
 type Item {

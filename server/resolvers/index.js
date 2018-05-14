@@ -1,3 +1,4 @@
+import User from '../models/user';
 
 const sampleItems = [
     { name: 'Apple' },
@@ -9,7 +10,13 @@ const sampleItems = [
 const resolvers = {
     Query: {
         items: () => sampleItems,
+        users: () => User.findAll(),
     },
+    Mutation:{
+        createUser: (_, data) => {
+            return User.create(data)
+        }
+    }
 };
 
 export default resolvers;
