@@ -1,0 +1,46 @@
+{
+    "extends": [
+        "airbnb",
+        "react-app"
+    ],
+    "rules": {
+        "max-len": [
+            2,
+            124
+        ],
+        "consistent-return": 0,
+        "no-debugger": 0,
+        "import/prefer-default-export": 0,
+        "import/first": 0,
+        "jsx-a11y/href-no-hash": "off",
+        "react/jsx-filename-extension": 0,
+        "react/jsx-indent": 0,
+        "react/require-default-props": 0,
+        "react/prop-types": 0,
+        "object-curly-newline": 0,
+        "jsx-a11y/anchor-is-valid": [
+            "warn",
+            {
+                "aspects": [
+                    "invalidHref"
+                ]
+            }
+        ],
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "react/jsx-indent-props": [
+            2,
+            4
+        ],
+        "click-events-have-key-events": 0,
+        "react/prefer-stateless-function": 0
+    },
+    "plugins": [
+        "flowtype"
+    ]
+}
