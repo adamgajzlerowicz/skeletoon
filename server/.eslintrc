@@ -39,8 +39,5 @@
         ],
         "click-events-have-key-events": 0,
         "react/prefer-stateless-function": 0
-    },
-    "plugins": [
-        "flowtype"
-    ]
+    }
 }

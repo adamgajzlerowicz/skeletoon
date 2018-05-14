@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-const User = require('./models/user');
+import { User } from './models/user';
+import Sequelize from 'sequelize';
 
 const DB = process.env.APP_SQL_DB || 'skeletoon';
 const SQL_LOGIN = process.env.APP_SQL_LOGIN || 'postgres';
@@ -12,14 +12,15 @@ const connection = new Sequelize(DB, SQL_LOGIN, SQL_PASSWORD, {
 });
 
 connection.authenticate()
-    .catch((err) => {
+    .then(() => {
+        // eslint-disable-next-line
+        console.log('connected to db');
+    }).catch((err) => {
         // eslint-disable-next-line
         console.error('Unable to connect to the database:', err);
     });
 
 connection.define('user', User);
 
-export {
-    connection as default
-}
+export default connection;
 

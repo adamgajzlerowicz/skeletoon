@@ -13,4 +13,7 @@ const User = {
     },
 };
 
-export default User;
+export {
+	User
+};
+
