@@ -4,10 +4,33 @@ import { isStrongPassword, validateEmail } from '../utils';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+const withAuth = authed => (_, args, context, ...rest) => {
+    if (!context.token) {
+        return new Error('Token is missing');
+    }
+
+    let result = null;
+
+    try {
+        result = jwt.verify(context.token, process.env.HASH);
+    } catch (__) {
+        return new Error('Incorrect token');
+    }
+
+    const { username, email } = result;
+    if (!username || !email) {
+        return new Error('Incorrect token');
+    }
+
+    return authed(_, args, { ...context, user: { username, email } }, ...rest);
+};
+
 
 const resolvers = {
     Query: {
-        users: resolver(User),
+
+        users: withAuth(resolver(User)),
+
         login: (_, data) => new Promise((res, rej) => {
             const error = 'Incorrect credentials';
             User.findOne({ where: { username: data.username } }).then((entity) => {

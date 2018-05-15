@@ -8,7 +8,7 @@ const options = { port: 4000 };
 const server = new GraphQLServer({
     typeDefs,
     resolvers,
-    context: req => ({ ...req, db: connection }),
+    context: req => ({ ...req, db: connection, token: req.request.headers.token }),
 });
 // eslint-disable-next-line
 server.start(options, () => console.log(`Server is running on localhost:${options.port}`));
