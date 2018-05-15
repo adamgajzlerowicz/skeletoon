@@ -1,34 +1,37 @@
+import { resolver } from 'graphql-sequelize';
 import User from '../models/user';
 
 const sampleItems = [
-{ name: 'Apple' },
-{ name: 'Banana' },
-{ name: 'Orange' },
-{ name: 'Melon' },
+    { name: 'Apple' },
+    { name: 'Banana' },
+    { name: 'Orange' },
+    { name: 'Melon' },
 ];
 
 const resolvers = {
     Query: {
         items: () => sampleItems,
-        users: () => User.findAll(),
+        users: resolver(User),
     },
     Mutation: {
-        createUser: (_, data) => {
-            const { username, password, email } = data;
-            return new Promise((res, rej)=>{
+        createUser: (_, data) =>
 
-                rej(new Error('Email format is incorrect'));
+            // const { username, password, email } = data;
+            User.create(data)
 
-                // if (!isStrongPassword(password)) {
-                //     return res.status(403).json({
-                //         error: 'Password is not complex enough',
-                //     });
-                // }
+            // return new Promise((res, rej)=>{
 
-            });
+            //     // rej(new Error('Email format is incorrect'));
 
-            return User.create(data);
-        },
+            //     // if (!isStrongPassword(password)) {
+            //     //     return res.status(403).json({
+            //     //         error: 'Password is not complex enough',
+            //     //     });
+            //     // }
+
+            // });
+
+        ,
     },
 };
 
