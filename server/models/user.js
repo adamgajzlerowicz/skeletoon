@@ -7,11 +7,11 @@ const User = connection.define('user', {
     username: {
         type: Sequelize.STRING,
         set(username) {
-            if(username.length < 5){
+            if (username.length < 5) {
                 throw new Error('Username is too short');
             }
             this.setDataValue('username', username);
-        }
+        },
     },
     email: {
         type: Sequelize.STRING,
