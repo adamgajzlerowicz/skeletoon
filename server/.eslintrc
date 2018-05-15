@@ -7,6 +7,7 @@
         "dependencies"
     ],
     "rules": {
+        "padded-blocks": 0,
         "dependencies/case-sensitive": 1,
         "dependencies/no-cycles": 1,
         "dependencies/no-unresolved": 1,

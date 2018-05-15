@@ -34,17 +34,16 @@ const resolvers = {
                 const emailPromise = User.findOne({ where: { email: data.email } });
                 const usernamePromise = User.findOne({ where: { username: data.username } });
 
-                Promise.all([emailPromise, usernamePromise]).then((data) => {
-                    if (data[0] && data[0].dataValues) {
+                return Promise.all([emailPromise, usernamePromise]).then((validation) => {
+                    if (validation[0] && validation[0].dataValues) {
                         rej(new Error('Email is already taken'));
                     }
 
-                    if (data[1] && data[1].dataValues) {
+                    if (validation[1] && validation[1].dataValues) {
                         rej(new Error('User name is already taken'));
                     }
-                    console.log('dupa');
-                    console.log(User.create(data));
-                    // return res(User.create(data));
+                    return res(User.create(data));
+
                 });
             });
         },
