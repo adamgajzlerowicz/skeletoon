@@ -16,7 +16,7 @@ const resolvers = {
                     rej(new Error(error));
                 }
 
-                const valid = bcrypt.compareSync(entity.dataValues.password_hash, data.password);
+                const valid = bcrypt.compareSync(data.password, entity.dataValues.password_hash);
 
                 if (!valid) {
                     rej(new Error(error));
@@ -26,8 +26,7 @@ const resolvers = {
                 const token = jwt.sign({ username, email }, process.env.HASH, {
                     expiresIn: 60 * 60 * 24, // expires in 24 hours
                 });
-
-                res(token);
+                res({ token });
 
             });
         }),

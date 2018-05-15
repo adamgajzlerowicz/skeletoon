@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"start": "cross-env HASH=nodemon index.js --exec babel-node --presets es2015,stage-2",
+		"start": "cross-env HASH=7k52BuoSmI1GQU25^1^8 nodemon index.js --exec babel-node --presets es2015,stage-2",
 		"seed": "nodemon seed.js --exec babel-node --presets es2015,stage-2",
 		"lint": "eslint . --ext .js --fix",
 		"docker": "docker restart skeletoon",
