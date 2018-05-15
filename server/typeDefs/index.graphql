@@ -1,7 +1,6 @@
 const typeDefs = `
 type Query {
-  items: [Item!]!,
-  users: [User], 
+  users: [User!]!,
   login(username: String!, password: String!): Login,
 }
 
@@ -10,8 +9,7 @@ type Mutation {
 }
 
 type Login {
-   username: String!,
-   password: String!
+   token: String!
 }
 
 type User {
@@ -20,9 +18,6 @@ type User {
   password: String!
 }
 
-type Item {
-  name: String!
-}
 `;
 
 export default typeDefs;

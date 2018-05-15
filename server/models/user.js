@@ -1,7 +1,6 @@
 import Sequelize from 'sequelize';
 import connection from '../connection';
 import bcrypt from 'bcrypt';
-import { isStrongPassword, validateEmail } from '../utils';
 
 const User = connection.define('user', {
     username: {

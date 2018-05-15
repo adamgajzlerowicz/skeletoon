@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"start": "nodemon index.js --exec babel-node --presets es2015,stage-2 ",
+		"start": "cross-env HASH=nodemon index.js --exec babel-node --presets es2015,stage-2",
 		"seed": "nodemon seed.js --exec babel-node --presets es2015,stage-2",
 		"lint": "eslint . --ext .js --fix",
 		"docker": "docker restart skeletoon",
@@ -14,9 +14,11 @@
 		"babel-preset-stage-2": "^6.24.1",
 		"babel-register": "^6.26.0",
 		"bcrypt": "^2.0.1",
+		"cross-env": "^5.1.5",
 		"graphql-relay": "^0.5.5",
 		"graphql-sequelize": "^8.1.0",
 		"graphql-yoga": "1.2.0",
+		"jsonwebtoken": "^8.2.1",
 		"nodemon": "^1.17.4",
 		"pg": "^6.0.0",
 		"sequelize": "^4.37.7"

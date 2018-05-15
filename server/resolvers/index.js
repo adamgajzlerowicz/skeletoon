@@ -1,21 +1,36 @@
 import { resolver } from 'graphql-sequelize';
 import User from '../models/user';
 import { isStrongPassword, validateEmail } from '../utils';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
-const sampleItems = [
-    { name: 'Apple' },
-    { name: 'Banana' },
-    { name: 'Orange' },
-    { name: 'Melon' },
-];
 
 const resolvers = {
     Query: {
-        items: () => sampleItems,
         users: resolver(User),
-        login: (_, data) => {
-            // console.log(data)
-        },
+        login: (_, data) => new Promise((res, rej) => {
+            const error = 'Incorrect credentials';
+            User.findOne({ where: { username: data.username } }).then((entity) => {
+
+                if (!entity || !entity.dataValues) {
+                    rej(new Error(error));
+                }
+
+                const valid = bcrypt.compareSync(entity.dataValues.password_hash, data.password);
+
+                if (!valid) {
+                    rej(new Error(error));
+                }
+
+                const { username, email } = entity.dataValues;
+                const token = jwt.sign({ username, email }, process.env.HASH, {
+                    expiresIn: 60 * 60 * 24, // expires in 24 hours
+                });
+
+                res(token);
+
+            });
+        }),
     },
     Mutation: {
         createUser: (_, data) => {
