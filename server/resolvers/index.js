@@ -14,24 +14,9 @@ const resolvers = {
         users: resolver(User),
     },
     Mutation: {
-        createUser: (_, data) =>
-
-            // const { username, password, email } = data;
-            User.create(data)
-
-            // return new Promise((res, rej)=>{
-
-            //     // rej(new Error('Email format is incorrect'));
-
-            //     // if (!isStrongPassword(password)) {
-            //     //     return res.status(403).json({
-            //     //         error: 'Password is not complex enough',
-            //     //     });
-            //     // }
-
-            // });
-
-        ,
+        createUser: (_, data) => {
+            User.create(data);
+        },
     },
 };
 
