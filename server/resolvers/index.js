@@ -14,9 +14,7 @@ const resolvers = {
         users: resolver(User),
     },
     Mutation: {
-        createUser: (_, data) => {
-            User.create(data);
-        },
+        createUser: (_, data) => User.create(data),
     },
 };
 
