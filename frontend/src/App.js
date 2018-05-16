@@ -7,8 +7,6 @@ import { graphql } from 'react-apollo'
 
 class App extends Component {
   render() {
-    console.log(this.props)
-
     if (this.props.data.loading) {
       return <div>Loading</div>
     }
