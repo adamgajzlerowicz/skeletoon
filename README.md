@@ -80,15 +80,20 @@ At the bottom of the page in `Headers` section insert the token like so:
 }
 ```
 
-**Securing endpoints**
+**Securing graphs**
 Surround your resolver with `withAuth` higher order function. That is it :)
 
 **Considerations for production**
 
 Set token in your server environment, rather then the test one in `package.json` in `start` script
 
+*Frontend*
+Frontend is wired up for development and communicates with backend for requests, but it is not configured to use any particular graphs.
+
 **TODO**
 
 * Add json refresh token
 * Cache tokens and invalidate them when new token is generated
 * Add flow and return errors as a { field: string, error: string } objects
+* On Frontend add registration and login forms. Then use received token for auth.
+
