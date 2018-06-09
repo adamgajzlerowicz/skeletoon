@@ -2,12 +2,17 @@
 'use strict';
 
 var Block = require("bs-platform/lib/js/block.js");
+var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 
 var component = ReasonReact.reducerComponent("Login");
 
 function make() {
+  var setLogin = function (_, self) {
+    console.log(self);
+    return /* () */0;
+  };
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -18,8 +23,11 @@ function make() {
           /* willUnmount */component[/* willUnmount */6],
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
-          /* render */(function () {
-              return React.createElement("div", undefined, "Login here");
+          /* render */(function (self) {
+              return React.createElement("div", undefined, "login", React.createElement("input", {
+                              value: self[/* state */1][/* login */0],
+                              onClick: Curry._1(self[/* handle */0], setLogin)
+                            }), "Login here");
             }),
           /* initialState */(function () {
               return /* record */[
