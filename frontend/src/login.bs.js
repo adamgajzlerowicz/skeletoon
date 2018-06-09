@@ -9,10 +9,6 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var component = ReasonReact.reducerComponent("Login");
 
 function make() {
-  var setLogin = function (_, self) {
-    console.log(self);
-    return /* () */0;
-  };
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -26,8 +22,16 @@ function make() {
           /* render */(function (self) {
               return React.createElement("div", undefined, "login", React.createElement("input", {
                               value: self[/* state */1][/* login */0],
-                              onClick: Curry._1(self[/* handle */0], setLogin)
-                            }), "Login here");
+                              onChange: (function (ev) {
+                                  return Curry._1(self[/* send */3], /* SetLogin */Block.__(0, [ev.target.value]));
+                                })
+                            }), "password", React.createElement("input", {
+                              type: "password",
+                              value: self[/* state */1][/* password */1],
+                              onChange: (function (ev) {
+                                  return Curry._1(self[/* send */3], /* SetPassword */Block.__(1, [ev.target.value]));
+                                })
+                            }));
             }),
           /* initialState */(function () {
               return /* record */[
