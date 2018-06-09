@@ -3,9 +3,9 @@
 
 var ReactDOMRe = require("reason-react/src/ReactDOMRe.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var Application$ReactTemplate = require("./application.bs.js");
+var Login$ReactTemplate = require("./login.bs.js");
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Application$ReactTemplate.make("Hello!", /* array */[])), "app");
+ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Login$ReactTemplate.make(/* array */[])), "app");
 
 console.log("dupa");
 
