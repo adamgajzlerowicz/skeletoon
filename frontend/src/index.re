@@ -1,5 +1,5 @@
 
- ReactDOMRe.renderToElementWithId(<App greeting="Hello!" />, "app");
+ ReactDOMRe.renderToElementWithId(<Application greeting="Hello!" />, "app");
 
 Js.log("dupa");
 
