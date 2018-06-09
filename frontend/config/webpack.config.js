@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReasonPlugin = require('reason-webpack-plugin')
 
 module.exports = {
-    entry: './src/boot.js',
+    entry: './src/index.bs',
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: 'index.js'
@@ -31,7 +31,7 @@ module.exports = {
     //     ]
     // },
 
-    // resolve: {
-    //     extensions: ['.re', '.ml', '.js']
-    // }
+    resolve: {
+        extensions: ['.re', '.ml', '.js']
+    }
 };

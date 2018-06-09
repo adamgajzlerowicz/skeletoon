@@ -1,2 +1,6 @@
 
-let boot = () => ReactDOMRe.renderToElementWithId(<App greeting="Hello!" />, "app");
+ ReactDOMRe.renderToElementWithId(<App greeting="Hello!" />, "app");
+
+Js.log("dupa");
+
+

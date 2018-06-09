@@ -8,6 +8,7 @@
     "start": "webpack-dev-server --config ./config/webpack.config.js -d"
   },
   "devDependencies": {
+    "bs-platform": "^3.1.5",
     "html-webpack-plugin": "^3.2.0",
     "reason-webpack-plugin": "^2.0.1",
     "webpack": "^4.11.0",

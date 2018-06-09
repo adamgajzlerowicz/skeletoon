@@ -1,0 +1,27 @@
+# ninja log v5
+1	17	1528522203	ReactTemplate.cmi	9459724cd5384e99
+0	45	1528522203	src/index.mlast	8451db771a60ffc5
+0	45	1528522203	src/App.mlast	5fd6e4692fbbac8c
+45	51	1528522203	src/index.mlast.d	d9f1f270b0fc5a38
+45	51	1528522203	src/App.mlast.d	c34fb1071f3aa37c
+0	25	1528522203	src/App-ReactTemplate.cmj	3e95ad5449759904
+0	25	1528522203	/Users/adamgajzlerowicz/projects/skeletoon/frontend/src/App.bs.js	3e95ad5449759904
+0	25	1528522203	src/App-ReactTemplate.cmi	3e95ad5449759904
+25	42	1528522203	src/index-ReactTemplate.cmj	a5b4e55738028cdb
+25	42	1528522203	/Users/adamgajzlerowicz/projects/skeletoon/frontend/src/index.bs.js	a5b4e55738028cdb
+25	42	1528522203	src/index-ReactTemplate.cmi	a5b4e55738028cdb
+0	65	1528522286	src/index.mlast	8451db771a60ffc5
+65	76	1528522286	src/index.mlast.d	d9f1f270b0fc5a38
+1	24	1528522286	src/index-ReactTemplate.cmj	a5b4e55738028cdb
+1	24	1528522286	/Users/adamgajzlerowicz/projects/skeletoon/frontend/src/index.bs.js	a5b4e55738028cdb
+1	24	1528522286	src/index-ReactTemplate.cmi	a5b4e55738028cdb
+0	117	1528522320	src/index.mlast	8451db771a60ffc5
+117	130	1528522320	src/index.mlast.d	d9f1f270b0fc5a38
+0	33	1528522320	src/index-ReactTemplate.cmj	a5b4e55738028cdb
+0	33	1528522320	/Users/adamgajzlerowicz/projects/skeletoon/frontend/src/index.bs.js	a5b4e55738028cdb
+0	33	1528522320	src/index-ReactTemplate.cmi	a5b4e55738028cdb
+0	51	1528522384	src/index.mlast	8451db771a60ffc5
+51	59	1528522384	src/index.mlast.d	d9f1f270b0fc5a38
+0	17	1528522384	src/index-ReactTemplate.cmj	a5b4e55738028cdb
+0	17	1528522384	/Users/adamgajzlerowicz/projects/skeletoon/frontend/src/index.bs.js	a5b4e55738028cdb
+0	17	1528522384	src/index-ReactTemplate.cmi	a5b4e55738028cdb
