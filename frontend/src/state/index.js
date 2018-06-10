@@ -1,20 +1,21 @@
 // @flow
 
-import { ApolloClient, HttpLink, InMemoryCache, setContext } from 'apollo-client-preset';
+import { ApolloClient } from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000' });
-
-console.log(setContext);
-const authLink = setContext((_, { headers }) => {
-    const token = localStorage.getItem('token');
-    return {
-        headers: {
-            ...headers,
-            authorization: token || '',
-        },
-    };
+const httpLink = createHttpLink({
+    uri: 'http://localhost:4000',
 });
 
+const authLink = setContext((_, { headers }) =>
+    ({
+        headers: {
+            ...headers,
+            authorization: sessionStorage.getItem('token') || '',
+        },
+    }));
 
 const client = new ApolloClient({
     link: authLink.concat(httpLink),
