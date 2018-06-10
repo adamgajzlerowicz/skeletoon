@@ -1,11 +1,11 @@
-// @flow
+// // @flow
 
-import * as React from 'react';
+// import * as React from 'react';
 
-const withUserDetails = (Component: React.Element<*>) => {
-    class WithDetails extends React.Component {
-        render() {
-            return <Component />;
-        }
-    }
-};
+// const withUserDetails = (Component: React.Element<*>) => {
+//     class WithDetails extends React.Component {
+//         render() {
+//             return <Component />;
+//         }
+//     }
+// };

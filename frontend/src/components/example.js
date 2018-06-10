@@ -16,6 +16,7 @@ class App extends Component<*> {
                 <header className="App-header">
                     <h1 className="App-title">Welcome to <code>graphql-yoga</code></h1>
                 </header>
+                {JSON.stringify(this.props.data)}
                 <div className="App-intro" />
             </div>
         );
@@ -24,8 +25,8 @@ class App extends Component<*> {
 
 const ITEMS_QUERY = gql`
   query ItemsQuery {
-    items {
-      name
+    users {
+      username, email
     }
   }
 `;

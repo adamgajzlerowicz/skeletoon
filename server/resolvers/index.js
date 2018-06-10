@@ -84,7 +84,7 @@ const resolvers = {
                     }
 
                     User.create(data)
-                        .then(res({ token: getToken({ username: data.username, password: data.password }) }));
+                        .then(res({ token: getToken({ username: data.username, email: data.email }) }));
 
                 });
             });
