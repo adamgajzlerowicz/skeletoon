@@ -26,6 +26,11 @@ const withAuth = authed => (_, args, context, ...rest) => {
 };
 
 
+const getToken = ({ username, email }) =>
+    jwt.sign({ username, email }, process.env.HASH, {
+        expiresIn: 60 * 60 * 24, // expires in 24 hours
+    });
+
 const resolvers = {
     Query: {
 
@@ -46,13 +51,12 @@ const resolvers = {
                 }
 
                 const { username, email } = entity.dataValues;
-                const token = jwt.sign({ username, email }, process.env.HASH, {
-                    expiresIn: 60 * 60 * 24, // expires in 24 hours
-                });
-                res({ token });
+
+                res({ token: getToken({ username, email }) });
             });
         }),
     },
+
     Mutation: {
         createUser: (_, data) => {
             if (data.username.length < 5) {
@@ -78,7 +82,9 @@ const resolvers = {
                     if (validation[1] && validation[1].dataValues) {
                         rej(new Error('User name is already taken'));
                     }
-                    return res(User.create(data));
+
+                    User.create(data)
+                        .then(res({token: getToken({ username: data.username, password: data.password })));
 
                 });
             });
