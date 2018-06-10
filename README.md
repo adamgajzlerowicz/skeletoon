@@ -11,6 +11,8 @@ git clone https://github.com/adamgajzlerowicz/skeletoon.git
 cd skeletoon
 ```
 
-Run graphql server [Docs](https://github.com/adamgajzlerowicz/skeletoon/tree/master/server)
+## Run graphql server
+[Docs](https://github.com/adamgajzlerowicz/skeletoon/tree/master/server)
 
-Run frontend app [Docs](https://github.com/adamgajzlerowicz/skeletoon/tree/master/frontend)
+## Run frontend app
+[Docs](https://github.com/adamgajzlerowicz/skeletoon/tree/master/frontend)
