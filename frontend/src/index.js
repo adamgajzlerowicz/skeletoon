@@ -1,7 +1,9 @@
+// @flow
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Example from './components/example';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset';
 
@@ -14,7 +16,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
     <ApolloProvider client={client}>
-        <App />
+        <Example />
     </ApolloProvider>,
-    document.getElementById('root'),
+    document.getElementById('root') || document.createElement('div'),
 );
