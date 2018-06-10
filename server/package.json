@@ -5,7 +5,6 @@
 		"lint": "eslint . --ext .js --fix",
 		"docker": "docker restart skeletoon",
 		"docker-create": "docker run --name skeletoon -p 5432:5432 -e POSTGRES_PASSWORD=dupa -d postgres",
-		"docker-create-mysql": "docker run --name skeletoon -e MYSQL_USER=dupa -p 3306:3306 -e MYSQL_ROOT_PASSWORD=dupa -d mysql",
 		"docker-destroy": "docker stop skeletoon; docker rm skeletoon"
 	},
 	"dependencies": {
@@ -20,12 +19,12 @@
 		"graphql-yoga": "1.2.0",
 		"jsonwebtoken": "^8.2.1",
 		"nodemon": "^1.17.4",
-		"pg": "^6.0.0",
 		"sequelize": "^4.37.7"
 	},
 	"devDependencies": {
 		"babel-eslint": "^8.2.3",
 		"eslint": "^4.19.1",
+		"pg": "^7.4.3",
 		"eslint-config-airbnb": "^16.1.0",
 		"eslint-config-react-app": "^2.1.0",
 		"eslint-plugin-dependencies": "^2.4.0",
