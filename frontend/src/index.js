@@ -7,7 +7,6 @@ import App from './app';
 import { client } from './state';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-
 import { ApolloProvider } from 'react-apollo';
 
 

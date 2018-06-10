@@ -71,7 +71,6 @@ Frontend is wired up for development and communicates with backend for requests,
 **TODO**
 
 * Add json refresh token
-* Cache tokens and invalidate them when new token is generated
 * Add flow and return errors as a { field: string, error: string } objects
 * On Frontend add registration and login forms. Then use received token for auth.
 
