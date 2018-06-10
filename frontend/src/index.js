@@ -17,5 +17,5 @@ ReactDOM.render(
             <App />
         </Router>
     </ApolloProvider>,
-    document.getElementById('root') || document.createElement('div', { id: 'root' }),
+    document.getElementById('root') || document.createElement('div'),
 );
