@@ -3,11 +3,15 @@
 import * as React from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
+// import All from 'crocks/All';
+// import mconcat from 'crocks/helpers/mconcat';
+
+// const allPass = mconcat(All);
 
 const Register = () => {
-    let username;
-    let password;
-    let email;
+    let username = '';
+    let password = '';
+    let email = '';
 
     return (
         <Mutation mutation={CREATE_USER}>
@@ -21,6 +25,7 @@ const Register = () => {
                                 password,
                                 email,
                             } });
+
                             // username = '';
                             // password = '';
                             // email = '';
@@ -30,14 +35,15 @@ const Register = () => {
                         <input
                             placeholder="username"
                             ref={(node: ?HTMLInputElement) => {
-                                username = node.value;
+                                username = node && node.value;
                             }}
                         />
 
                         <input
                             placeholder="email"
+                            type="email"
                             ref={(node: ?HTMLInputElement) => {
-                                email = node;
+                                email = node && node.value;
                             }}
                         />
 
@@ -45,10 +51,17 @@ const Register = () => {
                             placeholder="password"
                             type="password"
                             ref={(node: ?HTMLInputElement) => {
-                                password = node;
+                                password = node && node.value;
                             }}
                         />
-                        <button type="submit">Register</button>
+
+                        <button
+                            type="submit"
+                            // disabled={!allPass([username, password, email]).valueOf()}
+                        >
+                            Register
+                        </button>
+
                     </form>
                 </div>
             )}
