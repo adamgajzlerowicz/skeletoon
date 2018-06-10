@@ -9,19 +9,9 @@ yarn seed # create database structure. Once seeded, stop the process
 yarn start
 ```
 
+Connect to postgres instance anc create a skeletoon database `CREATE DATABASE skeletoon`
+
 In your browser navigate to [http://localhost:4000](http://localhost:4000).
-
-**Install dependencies and start the `frontend`:**
-
-In a second terminal window run:
-
-```sh
-cd ../frontend
-yarn install
-yarn start
-```
-
-Open your browser at [http://localhost:3000](http://localhost:3000).
 
 **Create User**
 
