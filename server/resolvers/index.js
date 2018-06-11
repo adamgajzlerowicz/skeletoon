@@ -26,10 +26,17 @@ const withAuth = authed => (_, args, context, ...rest) => {
 };
 
 
-const getToken = ({ username, email }) =>
-    jwt.sign({ username, email }, process.env.HASH, {
-        expiresIn: 60 * 60 * 24, // expires in 24 hours
-    });
+const getToken = ({ username, email }) => ({
+    token: jwt.sign({ username, email }, process.env.HASH, {
+        expiresIn: 60 * 10, // expires in 10 minutes
+    }),
+    refresh: jwt.sign({ username, email }, process.env.HASH, {
+        // add to tokens array
+        expiresIn: 60 * 60 * 24 * 31, // expires in 31 days
+    }),
+    ttl: 60 * 10,
+});
+
 
 const resolvers = {
     Query: {
@@ -52,7 +59,7 @@ const resolvers = {
 
                 const { username, email } = entity.dataValues;
 
-                res({ token: getToken({ username, email }) });
+                res(getToken({ username, email }));
             });
         }),
     },
@@ -84,8 +91,7 @@ const resolvers = {
                     }
 
                     User.create(data)
-                        .then(res({ token: getToken({ username: data.username, email: data.email }) }));
-
+                        .then(res(getToken({ username: data.username, email: data.email })));
                 });
             });
         },

@@ -9,7 +9,9 @@ type Mutation {
 }
 
 type Login {
-   token: String!
+   token: String!,
+   refresh: String!,
+   ttl: Int!
 }
 
 type User {
