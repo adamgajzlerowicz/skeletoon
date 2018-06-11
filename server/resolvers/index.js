@@ -18,6 +18,7 @@ const withAuth = authed => (_, args, context, ...rest) => {
     }
 
     const { username, email } = result;
+
     if (!username || !email) {
         return new Error('Incorrect token');
     }
@@ -40,9 +41,10 @@ const getToken = ({ username, email }) => ({
 
 const resolvers = {
     Query: {
-
         users: withAuth(resolver(User)),
+    },
 
+    Mutation: {
         login: (_, data) => new Promise((res, rej) => {
             const error = 'Incorrect credentials';
             User.findOne({ where: { username: data.username } }).then((entity) => {
@@ -62,9 +64,6 @@ const resolvers = {
                 res(getToken({ username, email }));
             });
         }),
-    },
-
-    Mutation: {
         createUser: (_, data) => {
             if (data.username.length < 5) {
                 throw new Error('Username is too short');
