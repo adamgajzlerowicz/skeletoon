@@ -5,6 +5,7 @@ import typeDefs from './typeDefs/index.graphql';
 
 
 const options = { port: 4000 };
+
 const server = new GraphQLServer({
     typeDefs,
     resolvers,

@@ -16,7 +16,7 @@ class App extends Component<*> {
                 <header className="App-header">
                     <h1 className="App-title">Welcome to <code>graphql-yoga</code></h1>
                 </header>
-                {JSON.stringify(this.props.data)}
+                {JSON.stringify(this.props.data.users)}
                 <div className="App-intro" />
             </div>
         );
