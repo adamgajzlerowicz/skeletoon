@@ -97,4 +97,10 @@ const resolvers = {
     },
 };
 
-export default resolvers;
+export {
+    resolvers as default,
+    withAuth,
+    getToken,
+    resolvers,
+};
+
