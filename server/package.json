@@ -1,11 +1,20 @@
 {
 	"scripts": {
+		"test": "jest ./src --watch",
+		"test-once": "jest ./src",
 		"start": "cross-env HASH=7k52BuoSmI1GQU25^1^8 nodemon index.js --exec babel-node --presets es2015,stage-2",
 		"seed": "nodemon seed.js --exec babel-node --presets es2015,stage-2",
 		"lint": "eslint . --ext .js --fix",
 		"docker": "docker restart skeletoon",
 		"docker-create": "docker run --name skeletoon -p 5432:5432 -e POSTGRES_PASSWORD=dupa -d postgres",
 		"docker-destroy": "docker stop skeletoon; docker rm skeletoon"
+	},
+	"jest": {
+		"testEnvironment": "node",
+		"testURL": "http://localhost",
+		"transform": {
+			"^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+		}
 	},
 	"dependencies": {
 		"babel-cli": "^6.26.0",
@@ -22,15 +31,20 @@
 		"sequelize": "^4.37.7"
 	},
 	"devDependencies": {
+		"babel-core": "^6.26.3",
 		"babel-eslint": "^8.2.3",
+		"babel-jest": "^23.0.1",
+		"babel-preset-env": "^1.7.0",
 		"eslint": "^4.19.1",
-		"pg": "^7.4.3",
 		"eslint-config-airbnb": "^16.1.0",
 		"eslint-config-react-app": "^2.1.0",
 		"eslint-plugin-dependencies": "^2.4.0",
 		"eslint-plugin-flowtype": "^2.46.3",
 		"eslint-plugin-import": "^2.11.0",
 		"eslint-plugin-jsx-a11y": "^6.0.3",
-		"eslint-plugin-react": "^7.8.2"
+		"eslint-plugin-react": "^7.8.2",
+		"jest": "^23.1.0",
+		"pg": "^7.4.3",
+		"regenerator-runtime": "^0.11.1"
 	}
 }
