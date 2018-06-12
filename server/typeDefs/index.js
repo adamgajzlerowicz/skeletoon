@@ -15,6 +15,7 @@ type Login {
 }
 
 type User {
+  id: String!,
   username: String!,
   email: String!
 }
