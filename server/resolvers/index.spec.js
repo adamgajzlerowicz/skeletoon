@@ -57,3 +57,9 @@ test('should return decoded token along with rest of the data', () => {
         'e',
     );
 });
+
+test('resolvers are defined', () => {
+    expect(resolvers.Query.users).toBeDefined();
+    expect(resolvers.Mutation.login).toBeDefined();
+    expect(resolvers.Mutation.createUser).toBeDefined();
+});
