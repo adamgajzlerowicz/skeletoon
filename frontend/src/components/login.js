@@ -23,8 +23,7 @@ class Register extends React.Component<{}, { username: string, password: string 
             <Mutation mutation={LOGIN}>
                 {(login, { data, error }) => {
                     if (data) {
-                        debugger;
-                        sessionStorage.setItem('token', data.login.token);
+                        localStorage.setItem('token', data.login.token);
                         return <Redirect to="/" />;
                     }
                     return (

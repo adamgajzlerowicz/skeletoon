@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Example from './components/example';
 import Login from './components/login';
+import Logout from './components/logout';
 import Register from './components/register';
 import Nav from './components/nav';
 
@@ -16,6 +17,7 @@ const App = () => (
             <Route exact path="/" component={Example} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/logout" component={Logout} />
         </div>
     </Router>
 );

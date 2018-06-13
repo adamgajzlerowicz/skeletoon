@@ -1,9 +1,11 @@
-import {
+import jwt from 'jsonwebtoken';
+import * as index from './index';
+
+const {
     withAuth,
     getToken,
     resolvers,
-} from './index';
-import jwt from 'jsonwebtoken';
+} = index;
 
 test('get token', () => {
     const username = 'foo';
@@ -63,3 +65,4 @@ test('resolvers are defined', () => {
     expect(resolvers.Mutation.login).toBeDefined();
     expect(resolvers.Mutation.createUser).toBeDefined();
 });
+

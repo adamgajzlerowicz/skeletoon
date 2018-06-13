@@ -1,8 +1,8 @@
 {
 	"scripts": {
-		"test": "cross-env HASH=7k52BuoSmI1GQU jest ./src --watch",
-		"test-once": "jest ./src",
-		"start": "yarn docker; cross-env HASH=7k52BuoSmI1GQU25^1^8 nodemon index.js --exec babel-node --presets es2015,stage-2",
+		"test": "cross-env HASH=J34j$jvBU*4Q%Qdt%84@ jest ./src --watch",
+		"test-once": "jest --coverage",
+		"start": "yarn docker; cross-env HASH=34j$jvBU*4Q%Qdt%84@%Ev%Qdt%84@ nodemon index.js --exec babel-node --presets es2015,stage-2",
 		"seed": "nodemon seed.js --exec babel-node --presets es2015,stage-2",
 		"lint": "eslint . --ext .js --fix",
 		"docker": "docker restart skeletoon",
@@ -26,12 +26,12 @@
 		"bcrypt": "^2.0.1",
 		"cross-env": "^5.1.5",
 		"graphql-relay": "^0.5.5",
-		"graphql-sequelize": "^8.1.0",
+		"graphql-sequelize": "^8.1.3",
 		"graphql-tag": "^2.9.2",
 		"graphql-yoga": "1.2.0",
 		"jsonwebtoken": "^8.2.1",
 		"nodemon": "^1.17.4",
-		"sequelize": "^4.37.7"
+		"sequelize": "^4.37.10"
 	},
 	"devDependencies": {
 		"babel-core": "^6.26.3",
