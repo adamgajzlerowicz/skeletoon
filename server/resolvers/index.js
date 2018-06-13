@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 
 const withAuth = authed => (_, args, context, ...rest) => {
     if (!context.token) {
-        return new Error('Token is missing');
+        throw new Error('Token is missing');
     }
 
     let result = null;
@@ -14,13 +14,13 @@ const withAuth = authed => (_, args, context, ...rest) => {
     try {
         result = jwt.verify(context.token, process.env.HASH);
     } catch (__) {
-        return new Error('Incorrect token');
+        throw new Error('Incorrect token');
     }
 
     const { username, email } = result;
 
     if (!username || !email) {
-        return new Error('Incorrect token');
+        throw new Error('Incorrect token');
     }
 
     return authed(_, args, { ...context, user: { username, email } }, ...rest);

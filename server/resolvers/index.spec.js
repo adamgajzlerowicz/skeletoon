@@ -28,11 +28,32 @@ test('token decodable', () => {
     expect(jwt.verify(result.refresh, process.env.HASH).username).toBe(username);
 });
 
-test('withAuth', () => {
+
+test('should throw when no token passed', () => {
     const spy = jest.fn();
+    const getWithAuth = () => withAuth(spy)(null, null, {});
+    expect(getWithAuth).toThrow('Token is missing');
+});
 
-    const result = withAuth(spy)(null, null, {});
-    console.log(result);
-    // expect(spy).toHaveBeenCalled();
+test('should throw when incorrect token is passed', () => {
+    const spy = jest.fn();
+    const getWithAuth = () => withAuth(spy)(null, null, { token: 'blah' });
+    expect(getWithAuth).toThrow('Incorrect token');
+});
 
+test('should return decoded token along with rest of the data', () => {
+    const username = 'foo';
+    const email = 'bar';
+
+    const tokenData = getToken({ username, email });
+    const spy = jest.fn();
+    withAuth(spy)('a', 'b', { token: tokenData.token, c: 'c' }, 'd', 'e');
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith(
+        'a',
+        'b',
+        { token: tokenData.token, user: { username, email }, c: 'c' },
+        'd',
+        'e',
+    );
 });
