@@ -17,21 +17,21 @@ const withAuth = authed => (_, args, context, ...rest) => {
         throw new Error('Incorrect token');
     }
 
-    const { username, email } = result;
+    const { username, email, id } = result;
 
-    if (!username || !email) {
+    if (!username || !email || !id) {
         throw new Error('Incorrect token');
     }
 
-    return authed(_, args, { ...context, user: { username, email } }, ...rest);
+    return authed(_, args, { ...context, user: { username, email, id } }, ...rest);
 };
 
 
-const getToken = ({ username, email }) => ({
-    token: jwt.sign({ username, email }, process.env.HASH, {
+const getToken = ({ username, email, id }) => ({
+    token: jwt.sign({ username, email, id }, process.env.HASH, {
         expiresIn: 60 * 10, // expires in 10 minutes
     }),
-    refresh: jwt.sign({ username, email }, process.env.HASH, {
+    refresh: jwt.sign({ username, email, id }, process.env.HASH, {
         // add to tokens array
         expiresIn: 60 * 60 * 24 * 31, // expires in 31 days
     }),
@@ -42,6 +42,10 @@ const getToken = ({ username, email }) => ({
 const resolvers = {
     Query: {
         users: withAuth(resolver(User)),
+        me: withAuth((_, __, context) => {
+            const { user: { username, email, id } } = context;
+            return { username, email, id };
+        }),
     },
 
     Mutation: {
@@ -59,9 +63,9 @@ const resolvers = {
                     rej(new Error(error));
                 }
 
-                const { username, email } = entity.dataValues;
+                const { username, email, id } = entity.dataValues;
 
-                res(getToken({ username, email }));
+                res(getToken({ username, email, id }));
             });
         }),
         createUser: (_, data) => {
@@ -90,7 +94,9 @@ const resolvers = {
                     }
 
                     User.create(data)
-                        .then(res(getToken({ username: data.username, email: data.email })));
+                        .then((user) => {
+                            res(getToken({ username: data.username, email: data.email, id: user.dataValues.id }));
+                        });
                 });
             });
         },
