@@ -10,8 +10,9 @@ const {
 test('get token', () => {
     const username = 'foo';
     const email = 'bar';
+    const id = 'le';
 
-    const result = getToken({ username, email });
+    const result = getToken({ username, email, id });
 
     expect(result).toHaveProperty('token');
     expect(result).toHaveProperty('refresh');
@@ -21,13 +22,16 @@ test('get token', () => {
 test('token decodable', () => {
     const username = 'foo';
     const email = 'bar';
-    const result = getToken({ username, email });
+    const id = 'le';
+
+    const result = getToken({ username, email, id });
 
     expect(jwt.verify(result.token, process.env.HASH)).toHaveProperty('email');
     expect(jwt.verify(result.token, process.env.HASH).email).toBe(email);
     expect(jwt.verify(result.token, process.env.HASH).username).toBe(username);
     expect(jwt.verify(result.refresh, process.env.HASH).email).toBe(email);
     expect(jwt.verify(result.refresh, process.env.HASH).username).toBe(username);
+    expect(jwt.verify(result.refresh, process.env.HASH).id).toBe(id);
 });
 
 
@@ -46,15 +50,16 @@ test('should throw when incorrect token is passed', () => {
 test('should return decoded token along with rest of the data', () => {
     const username = 'foo';
     const email = 'bar';
+    const id = 'le';
 
-    const tokenData = getToken({ username, email });
+    const tokenData = getToken({ username, email, id });
     const spy = jest.fn();
     withAuth(spy)('a', 'b', { token: tokenData.token, c: 'c' }, 'd', 'e');
     expect(spy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledWith(
         'a',
         'b',
-        { token: tokenData.token, user: { username, email }, c: 'c' },
+        { token: tokenData.token, user: { username, email, id }, c: 'c' },
         'd',
         'e',
     );
