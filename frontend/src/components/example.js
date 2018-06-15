@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import './example.css';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import withUserDetails from '../hoc/withUserDetails';
 
 class App extends Component<*> {
     render() {
@@ -31,4 +32,5 @@ const ITEMS_QUERY = gql`
   }
 `;
 
-export default graphql(ITEMS_QUERY)(App);
+const foo = withUserDetails(graphql(ITEMS_QUERY)(App));
+export default foo;
