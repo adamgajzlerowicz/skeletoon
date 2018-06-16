@@ -2,40 +2,19 @@ import { resolver } from 'graphql-sequelize';
 import User from '../models/user';
 import { isStrongPassword, validateEmail } from '../utils';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-
-const withAuth = authed => (_, args, context, ...rest) => {
-    if (!context.token) {
-        return new Error('Token is missing');
-    }
-
-    let result = null;
-
-    try {
-        result = jwt.verify(context.token, process.env.HASH);
-    } catch (__) {
-        return new Error('Incorrect token');
-    }
-
-    const { username, email } = result;
-    if (!username || !email) {
-        return new Error('Incorrect token');
-    }
-
-    return authed(_, args, { ...context, user: { username, email } }, ...rest);
-};
+import { getToken } from './helpers';
 
 
-const getToken = ({ username, email }) =>
-    jwt.sign({ username, email }, process.env.HASH, {
-        expiresIn: 60 * 60 * 24, // expires in 24 hours
-    });
-
-const resolvers = {
+const resolvers = withAuth => ({
     Query: {
-
         users: withAuth(resolver(User)),
+        me: withAuth((_, __, context) => {
+            const { user: { username, email, id } } = context;
+            return { username, email, id };
+        }),
+    },
 
+    Mutation: {
         login: (_, data) => new Promise((res, rej) => {
             const error = 'Incorrect credentials';
             User.findOne({ where: { username: data.username } }).then((entity) => {
@@ -50,14 +29,11 @@ const resolvers = {
                     rej(new Error(error));
                 }
 
-                const { username, email } = entity.dataValues;
+                const { username, email, id } = entity.dataValues;
 
-                res({ token: getToken({ username, email }) });
+                res(getToken({ username, email, id }));
             });
         }),
-    },
-
-    Mutation: {
         createUser: (_, data) => {
             if (data.username.length < 5) {
                 throw new Error('Username is too short');
@@ -84,11 +60,17 @@ const resolvers = {
                     }
 
                     User.create(data)
-                        .then(res({ token: getToken({ username: data.username, email: data.password }) }));
+                        .then((user) => {
+                            res(getToken({ username: data.username, email: data.email, id: user.dataValues.id }));
+                        });
                 });
             });
         },
     },
+});
+
+export {
+    resolvers as default,
+    resolvers,
 };
 
-export default resolvers;

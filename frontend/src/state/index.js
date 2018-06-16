@@ -13,7 +13,7 @@ const authLink = setContext((_, { headers }) =>
     ({
         headers: {
             ...headers,
-            token: sessionStorage.getItem('token') || '',
+            token: localStorage.getItem('token') || '',
         },
     }));
 

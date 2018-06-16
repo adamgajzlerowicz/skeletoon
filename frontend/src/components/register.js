@@ -23,7 +23,7 @@ class Register extends React.Component<{}, { username: string, password: string,
             <Mutation mutation={CREATE_USER}>
                 {(createUser, { data, error }) => {
                     if (data) {
-                        sessionStorage.setItem('token', data.createUser.token);
+                        localStorage.setItem('token', data.createUser.token);
                         return <Redirect to="/" />;
                     }
                     return (
@@ -77,9 +77,9 @@ class Register extends React.Component<{}, { username: string, password: string,
 
 
 const CREATE_USER = gql`
-  mutation addTodo($username: String!, $email: String!, $password: String!) {
+  mutation createUser($username: String!, $email: String!, $password: String!) {
     createUser(username: $username, email: $email, password: $password) {
-      token
+      token, refresh, ttl
     }
   }
 
