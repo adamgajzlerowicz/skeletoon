@@ -21,7 +21,12 @@ class Register extends React.Component<{}, { username: string, password: string 
     render() {
         const { username, password } = this.state;
         return (
-            <Mutation mutation={LOGIN}>
+            <Mutation
+                mutation={LOGIN}
+                onError={() => {
+                    console.log('dupa');
+                }}
+            >
                 {(login, { data, error }) => {
                     if (data) {
                         localStorage.setItem('token', data.login.token);
