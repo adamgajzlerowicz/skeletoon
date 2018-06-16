@@ -25,7 +25,9 @@ class Register extends React.Component<{}, { username: string, password: string 
                 {(login, { data, error }) => {
                     if (data) {
                         localStorage.setItem('token', data.login.token);
-                        client.resetStore();
+                        client.resetStore().then(() => {
+                            client.reFetchObservableQueries();
+                        });
                         return <Redirect to="/" />;
                     }
                     return (

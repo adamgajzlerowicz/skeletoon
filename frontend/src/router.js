@@ -10,7 +10,6 @@ import Register from './components/register';
 import Nav from './components/nav';
 import Auth from './components/auth';
 
-
 const Users = () => <div>dupa</div>;
 
 const App = () => (
@@ -22,7 +21,9 @@ const App = () => (
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/logout" component={Logout} />
-            {/* Protected routes: */}
+            {
+                /* Protected routes: */
+            }
             <Route path="/zone" component={Auth} />
             <Route path="/zone/users" component={Users} />
         </div>

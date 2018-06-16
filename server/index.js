@@ -12,4 +12,3 @@ const server = new GraphQLServer({
 });
 // eslint-disable-next-line
 server.start(options, () => console.log(`Server is running on localhost:${options.port}`));
-
