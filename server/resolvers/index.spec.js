@@ -66,6 +66,7 @@ test('resolvers are defined', () => {
     expect(resolvers(() => null).Query.users).toBeDefined();
     expect(resolvers(() => null).Mutation.login).toBeDefined();
     expect(resolvers(() => null).Mutation.createUser).toBeDefined();
+    expect(resolvers(() => null).Mutation.refresh).toBeDefined();
 });
 
 test('user resolver uses auth interceptor', () => {

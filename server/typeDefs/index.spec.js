@@ -57,3 +57,17 @@ test('login', async () => {
     expect(result.data.login).toHaveProperty('refresh');
     expect(result.data.login).toHaveProperty('ttl');
 });
+
+test('refresh', async () => {
+    const query = `
+      mutation
+        {
+          refresh(token: "eyJhbGI6Im5lbswIqJS-ac"){
+            token
+          }
+        }
+    `;
+
+    const result = await graphql(schema, query);
+    expect(result.data.refresh).toHaveProperty('token');
+});
