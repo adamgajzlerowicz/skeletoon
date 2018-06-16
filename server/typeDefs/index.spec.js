@@ -1,4 +1,5 @@
 import schemaString from './index';
+// eslint-disable-next-line
 import { graphql } from 'graphql';
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 
