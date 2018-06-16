@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { withAuth, getToken } from './helpers';
+import { withAuth, getToken, decode } from './helpers';
 import * as index from './index';
 
 const { resolvers } = index;
@@ -77,4 +77,22 @@ test('user resolver uses auth interceptor', () => {
 test('me resolver uses auth interceptor', () => {
     const spy = () => 'blah';
     expect(resolvers(spy).Query.me).toBe('blah');
+});
+
+test('decode', () => {
+    const username = 'foo';
+    const email = 'bar';
+    const id = 'le';
+
+    const token = getToken({ username, email, id });
+    const result = decode(token.token);
+    expect(result.username).toBe(username);
+    expect(result.email).toBe(email);
+    expect(result.id).toBe(id);
+});
+
+test('decode throws', () => {
+    const decodeThrows = () => decode({ token: 'blah' });
+    // This message is used in FE to check if it should refresh the token!!!!
+    expect(decodeThrows).toThrow('Incorrect token');
 });
