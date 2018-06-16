@@ -63,8 +63,17 @@ test('should return decoded token along with rest of the data', () => {
 });
 
 test('resolvers are defined', () => {
-    expect(resolvers.Query.users).toBeDefined();
-    expect(resolvers.Mutation.login).toBeDefined();
-    expect(resolvers.Mutation.createUser).toBeDefined();
+    expect(resolvers(() => null).Query.users).toBeDefined();
+    expect(resolvers(() => null).Mutation.login).toBeDefined();
+    expect(resolvers(() => null).Mutation.createUser).toBeDefined();
 });
 
+test('user resolver uses auth interceptor', () => {
+    const spy = () => 'blah';
+    expect(resolvers(spy).Query.users).toBe('blah');
+});
+
+test('me resolver uses auth interceptor', () => {
+    const spy = () => 'blah';
+    expect(resolvers(spy).Query.me).toBe('blah');
+});

@@ -4,7 +4,6 @@ import { isStrongPassword, validateEmail } from '../utils';
 import bcrypt from 'bcrypt';
 import { getToken } from './helpers';
 
-
 const resolvers = withAuth => ({
     Query: {
         users: withAuth(resolver(User)),
