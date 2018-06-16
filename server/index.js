@@ -1,6 +1,6 @@
 import { GraphQLServer } from 'graphql-yoga';
 import connection from './connection';
-import resolvers from './resolvers';
+import { resolvers } from './resolvers';
 import typeDefs from './typeDefs';
 import { withAuth } from './resolvers/helpers';
 
