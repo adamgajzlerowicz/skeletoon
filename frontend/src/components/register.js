@@ -6,6 +6,8 @@ import { Mutation } from 'react-apollo';
 import { Redirect } from 'react-router-dom';
 import All from 'crocks/All';
 import mconcat from 'crocks/helpers/mconcat';
+import { client } from '../state';
+import { errorHandler } from '../helpers/errorHandler';
 
 const allPass = mconcat(All);
 
@@ -20,10 +22,16 @@ class Register extends React.Component<{}, { username: string, password: string,
     render() {
         const { username, password, email } = this.state;
         return (
-            <Mutation mutation={CREATE_USER}>
+            <Mutation
+                mutation={CREATE_USER}
+                onError={errorHandler}
+            >
                 {(createUser, { data, error }) => {
                     if (data) {
                         localStorage.setItem('token', data.createUser.token);
+                        client.resetStore().then(() => {
+                            client.reFetchObservableQueries();
+                        });
                         return <Redirect to="/" />;
                     }
                     return (

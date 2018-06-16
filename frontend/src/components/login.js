@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 import All from 'crocks/All';
 import mconcat from 'crocks/helpers/mconcat';
 import { client } from '../state';
+import { errorHandler } from '../helpers/errorHandler';
 
 const allPass = mconcat(All);
 
@@ -23,9 +24,7 @@ class Register extends React.Component<{}, { username: string, password: string 
         return (
             <Mutation
                 mutation={LOGIN}
-                onError={() => {
-                    console.log('dupa');
-                }}
+                onError={errorHandler}
             >
                 {(login, { data, error }) => {
                     if (data) {
