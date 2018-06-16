@@ -6,7 +6,12 @@ type Query {
 
 type Mutation {
     login(username: String!, password: String!): Login,
-    createUser(username: String!, email: String, password: String): Login
+    createUser(username: String!, email: String, password: String): Login,
+    refresh(token: String!): Token
+}
+
+type Token {
+  token: String!
 }
 
 type Login {

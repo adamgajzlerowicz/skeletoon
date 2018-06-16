@@ -1,17 +1,19 @@
 import jwt from 'jsonwebtoken';
 
+const decode = (token) => {
+    try {
+        return jwt.verify(token, process.env.HASH);
+    } catch (__) {
+        throw new Error('Incorrect token');
+    }
+};
+
 const withAuth = authed => (_, args, context, ...rest) => {
     if (!context.token) {
         throw new Error('Token is missing');
     }
 
-    let result = null;
-
-    try {
-        result = jwt.verify(context.token, process.env.HASH);
-    } catch (__) {
-        throw new Error('Incorrect token');
-    }
+    const result = decode(context.token);
 
     const { username, email, id } = result;
 
@@ -35,5 +37,5 @@ const getToken = ({ username, email, id }) => ({
 });
 
 export {
-    getToken, withAuth,
+    getToken, withAuth, decode,
 };

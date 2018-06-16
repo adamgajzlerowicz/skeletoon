@@ -2,7 +2,7 @@ import { resolver } from 'graphql-sequelize';
 import User from '../models/user';
 import { isStrongPassword, validateEmail } from '../utils';
 import bcrypt from 'bcrypt';
-import { getToken } from './helpers';
+import { decode, getToken } from './helpers';
 
 const resolvers = withAuth => ({
     Query: {
@@ -64,6 +64,10 @@ const resolvers = withAuth => ({
                         });
                 });
             });
+        },
+        refresh: (_, data) => {
+            const { username, email, id } = decode(data.token);
+            return getToken({ username, email, id });
         },
     },
 });
