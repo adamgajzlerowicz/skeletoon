@@ -42,7 +42,7 @@ const client = new ApolloClient({
     link,
     cache: new InMemoryCache(),
 });
-
+window.client = client;
 export {
     client,
     url,

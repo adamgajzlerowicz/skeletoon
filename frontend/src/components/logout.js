@@ -6,6 +6,7 @@ import { client } from '../state';
 
 const Logout = () => {
     localStorage.clear();
+    client.cache.reset();
     client.resetStore().then(() => {
         client.reFetchObservableQueries();
     });

@@ -30,6 +30,7 @@ class Register extends React.Component<{}, { username: string, password: string 
                     if (data) {
                         localStorage.setItem('token', data.login.token);
                         localStorage.setItem('refresh', data.login.refresh);
+                        client.cache.reset();
                         client.resetStore().then(() => {
                             client.reFetchObservableQueries();
                         });
