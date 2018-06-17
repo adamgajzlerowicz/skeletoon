@@ -80,7 +80,7 @@ class Register extends React.Component<{}, { username: string, password: string 
 const LOGIN = gql`
   mutation login($username: String!, $password:String!) {
     login(username: $username, password: $password){
-      token, refresh, ttl
+      token, refresh
     }
   }
 `;
