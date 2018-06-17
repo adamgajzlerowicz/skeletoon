@@ -7,9 +7,13 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 import { errorHandler } from '../helpers/errorHandler';
+import { customFetch } from './fetch';
+
+const url = 'http://localhost:4000';
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:4000',
+    uri: url,
+    fetch: customFetch(url),
 });
 
 const authLink = setContext((_, { headers }) =>
@@ -41,4 +45,5 @@ const client = new ApolloClient({
 
 export {
     client,
+    url,
 };

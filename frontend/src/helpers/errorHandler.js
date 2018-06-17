@@ -1,7 +1,6 @@
 // @flow
 
-const errorHandler = (_error: string) => null;
-
+const errorHandler = console.log;
 export {
     errorHandler,
 };
