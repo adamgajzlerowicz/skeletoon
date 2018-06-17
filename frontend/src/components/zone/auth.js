@@ -1,13 +1,12 @@
 // @flow
 
 import * as React from 'react';
-import withUserDetails from '../hoc/withUserDetails';
+import withUserDetails from '../../hoc/withUserDetails';
 import { Redirect } from 'react-router-dom';
-import { client } from '../state';
+import { client } from '../../state';
 
-
-const Auth = ({ data }) => {
-    if (!localStorage.getItem('token') || data.error) {
+const Auth = ({ me }) => {
+    if (!localStorage.getItem('token') || !me) {
         client.resetStore().then(() => {
             client.reFetchObservableQueries();
         });

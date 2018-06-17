@@ -3,15 +3,15 @@
 import * as React from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-
+import Loading from '../components/loading';
 
 const withUserDetails = (Component: *) => {
     class WithDetails extends React.Component<*> {
         render() {
             if (this.props.data.loading) {
-                return <div>Loading</div>;
+                return <Loading />;
             }
-            return <Component data={this.props.data} />;
+            return <Component me={this.props.data.me} />;
         }
     }
     return graphql(ITEMS_QUERY)(WithDetails);
