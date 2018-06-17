@@ -16,8 +16,7 @@ type Token {
 
 type Login {
    token: String!,
-   refresh: String!,
-   ttl: Int!
+   refresh: String!
 }
 
 type User {

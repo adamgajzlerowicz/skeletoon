@@ -13,7 +13,6 @@ test('get token', () => {
 
     expect(result).toHaveProperty('token');
     expect(result).toHaveProperty('refresh');
-    expect(result).toHaveProperty('ttl');
 });
 
 test('token decodable', () => {

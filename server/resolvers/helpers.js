@@ -27,13 +27,12 @@ const withAuth = authed => (_, args, context, ...rest) => {
 
 const getToken = ({ username, email, id }) => ({
     token: jwt.sign({ username, email, id }, process.env.HASH, {
-        expiresIn: 60 * 10, // expires in 10 minutes
+        expiresIn: 60 * 5, // expires in 5 minutes
     }),
     refresh: jwt.sign({ username, email, id }, process.env.HASH, {
         // add to tokens array
-        expiresIn: 60 * 60 * 24 * 31, // expires in 31 days
+        expiresIn: 60 * 60 * 24 * 31 * 2, // expires in 62 days
     }),
-    ttl: 60 * 10,
 });
 
 export {
