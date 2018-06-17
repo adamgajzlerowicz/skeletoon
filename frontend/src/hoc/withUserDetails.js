@@ -10,10 +10,11 @@ const withUserDetails = (Component: *) => () => (
     <Query
         query={ITEMS_QUERY}
         onError={errorHandler}
+        errorPolicy="ignore"
     >
-        {({ loading, data }) => {
+        {({ error, loading, data }) => {
             if (loading) return <Loading />;
-            return <Component me={data ? data.me : null} />;
+            return <Component me={error ? data : data.me} />;
         }}
     </Query>
 );
