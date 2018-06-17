@@ -4,9 +4,13 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Loading from '../loading';
+import { errorHandler } from '../../helpers/errorHandler';
 
 const Users = () => (
-    <Query query={ITEMS_QUERY}>
+    <Query
+        query={ITEMS_QUERY}
+        onError={errorHandler}
+    >
         {({ loading, data }) => {
             if (loading) return <Loading />;
             return (

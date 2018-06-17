@@ -2,20 +2,21 @@
 
 import * as React from 'react';
 import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
+import { Query } from 'react-apollo';
 import Loading from '../components/loading';
+import { errorHandler } from '../helpers/errorHandler';
 
-const withUserDetails = (Component: *) => {
-    class WithDetails extends React.Component<*> {
-        render() {
-            if (this.props.data.loading) {
-                return <Loading />;
-            }
-            return <Component me={this.props.data.me} />;
-        }
-    }
-    return graphql(ITEMS_QUERY)(WithDetails);
-};
+const withUserDetails = (Component: *) => () => (
+    <Query
+        query={ITEMS_QUERY}
+        onError={errorHandler}
+    >
+        {({ loading, data }) => {
+            if (loading) return <Loading />;
+            return <Component me={data ? data.me : null} />;
+        }}
+    </Query>
+);
 
 const ITEMS_QUERY = gql`
   query ItemsQuery {
