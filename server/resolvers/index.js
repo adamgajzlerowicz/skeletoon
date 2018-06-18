@@ -1,31 +1,30 @@
 import { resolver } from 'graphql-sequelize';
-import { User } from '../models';
+import { User, Company } from '../models';
 import { isStrongPassword, validateEmail } from '../utils';
 import bcrypt from 'bcrypt';
 import { decode, getToken } from './helpers';
 
+const INCORRECT_DETAILS_ERROR = 'Incorrect credentials';
+
 const resolvers = withAuth => ({
     Query: {
         users: withAuth(resolver(User)),
-        me: withAuth((_, __, context) => {
-            const { user: { username, email, id } } = context;
-            return { username, email, id };
-        }),
+        me: withAuth((_, __, { user: { username, email, id } }) =>
+            User.findOne({ where: { username, email, id }, include: [{ model: Company }] })),
     },
 
     Mutation: {
         login: (_, data) => new Promise((res, rej) => {
-            const error = 'Incorrect credentials';
             User.findOne({ where: { username: data.username } }).then((entity) => {
 
                 if (!entity || !entity.dataValues) {
-                    rej(new Error(error));
+                    rej(new Error(INCORRECT_DETAILS_ERROR));
                 }
 
                 const valid = bcrypt.compareSync(data.password, entity.dataValues.password_hash);
 
                 if (!valid) {
-                    rej(new Error(error));
+                    rej(new Error(INCORRECT_DETAILS_ERROR));
                 }
 
                 const { username, email, id } = entity.dataValues;
@@ -39,7 +38,7 @@ const resolvers = withAuth => ({
             }
 
             if (!validateEmail(data.email)) {
-                throw new Error('Email is fromatted incorrectly');
+                throw new Error('Email is incorrect');
             }
 
             if (!isStrongPassword(data.password)) {

@@ -67,7 +67,3 @@ Set token in your server environment, rather then the test one in `package.json`
 
 *Frontend*
 Frontend is wired up for development and communicates with backend for requests, but it is not configured to use any particular graphs.
-
-**TODO**
-
-* Add json refresh token
