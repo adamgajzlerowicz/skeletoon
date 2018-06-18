@@ -1,22 +1,40 @@
 import bcrypt from 'bcrypt';
-import User from './models/user';
+import { User, Company } from './models';
 
-// sync resets the db
-User.sync({ force: true }).then(() => {
-    bcrypt.hash('123', 10, (err, hash) => {
-        User.create({
-            username: 'adam',
-            password_hash: hash,
-            email: 'nelf86@gmail.com',
-        });
+Company.sync({ force: true }).then(() => {
+    Company.create({
+        name: 'dupa',
+        childrenLimit: 20,
+        firstHourRate: 20.50,
+        hourRate: 10,
     });
 
-    bcrypt.hash('00R0%EvBU*4Q%Qdt%84@', 10, (err, hash) => {
-        User.create({
-            username: 'nelf87',
-            password_hash: hash,
-            email: 'foo@bar.com',
-        });
+    Company.create({
+        name: 'Another company',
+        childrenLimit: 3,
+        firstHourRate: 20,
+        hourRate: 20,
+    });
+
+});
+
+
+User.sync({ force: true }).then(() => {
+    const hash = bcrypt.hashSync('123', 10);
+    const anotherHash = bcrypt.hashSync('123', 10);
+
+    User.create({
+        username: 'adam',
+        password_hash: hash,
+        email: 'nelf86@gmail.com',
+        companyId: 1,
+    });
+
+    User.create({
+        username: 'nelf87',
+        password_hash: anotherHash,
+        email: 'foo@bar.com',
+        companyId: 1,
     });
 });
 

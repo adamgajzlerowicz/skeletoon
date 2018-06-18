@@ -19,10 +19,18 @@ type Login {
    refresh: String!
 }
 
+type Company {
+  id: String!
+  childrenLimit: Float!,
+  firstHourRate: Float!,
+  hourRate: Float!
+}
+
 type User {
   id: String!,
   username: String!,
-  email: String!
+  email: String!,
+  company: Company
 }
 
 `;

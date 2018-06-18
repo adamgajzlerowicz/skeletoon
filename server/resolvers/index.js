@@ -1,5 +1,5 @@
 import { resolver } from 'graphql-sequelize';
-import User from '../models/user';
+import { User } from '../models';
 import { isStrongPassword, validateEmail } from '../utils';
 import bcrypt from 'bcrypt';
 import { decode, getToken } from './helpers';
