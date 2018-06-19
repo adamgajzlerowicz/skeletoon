@@ -3,8 +3,17 @@ import { User, Company } from '../models';
 import { isStrongPassword, validateEmail } from '../utils';
 import bcrypt from 'bcrypt';
 import { decode, getToken } from './helpers';
+import {
+    t,
+    INCORRECT_DETAILS_ERROR,
+    USERNAME_TOO_SHORT_ERROR,
+    INCORRECT_EMAIL_ERROR,
+    WEAK_PASSWORD_ERROR,
+    EMAIL_IN_USE_ERROR,
+    USERNAME_IN_USE_ERROR,
+} from '../localization';
 
-const INCORRECT_DETAILS_ERROR = 'Incorrect credentials';
+
 
 const resolvers = withAuth => ({
     Query: {
@@ -18,7 +27,7 @@ const resolvers = withAuth => ({
             User.findOne({ where: { username: data.username } }).then((entity) => {
 
                 if (!entity || !entity.dataValues) {
-                    rej(new Error(INCORRECT_DETAILS_ERROR));
+                    rej(new Error(t.t(INCORRECT_DETAILS_ERROR)));
                 }
 
                 const valid = bcrypt.compareSync(data.password, entity.dataValues.password_hash);
@@ -34,15 +43,15 @@ const resolvers = withAuth => ({
         }),
         createUser: (_, data) => {
             if (data.username.length < 5) {
-                throw new Error('Username is too short');
+                throw new Error(t.key(USERNAME_TOO_SHORT_ERROR));
             }
 
             if (!validateEmail(data.email)) {
-                throw new Error('Email is incorrect');
+                throw new Error(t.key(INCORRECT_EMAIL_ERROR));
             }
 
             if (!isStrongPassword(data.password)) {
-                throw new Error('Password is not strong enough');
+                throw new Error(t.key(WEAK_PASSWORD_ERROR));
             }
             return new Promise((res, rej) => {
                 const emailPromise = User.findOne({ where: { email: data.email } });
@@ -50,11 +59,11 @@ const resolvers = withAuth => ({
 
                 return Promise.all([emailPromise, usernamePromise]).then((validation) => {
                     if (validation[0] && validation[0].dataValues) {
-                        rej(new Error('Email is already taken'));
+                        rej(new Error(t.key(EMAIL_IN_USE_ERROR)));
                     }
 
                     if (validation[1] && validation[1].dataValues) {
-                        rej(new Error('User name is already taken'));
+                        rej(new Error(t.key(USERNAME_IN_USE_ERROR)));
                     }
 
                     User.create(data)
