@@ -8,6 +8,7 @@ import All from 'crocks/All';
 import mconcat from 'crocks/helpers/mconcat';
 import { client } from '../state';
 import { errorHandler } from '../helpers/errorHandler';
+import { translate } from 'react-i18next';
 
 const allPass = mconcat(All);
 
@@ -21,6 +22,8 @@ class Register extends React.Component<{}, { username: string, password: string,
     }
     render() {
         const { username, password, email } = this.state;
+        const { t } = this.props;
+
         return (
             <Mutation
                 mutation={CREATE_USER}
@@ -44,7 +47,7 @@ class Register extends React.Component<{}, { username: string, password: string,
                             >
 
                                 <input
-                                    placeholder="username"
+                                    placeholder={t('username')}
                                     name="username"
                                     value={username}
                                     required
@@ -52,7 +55,7 @@ class Register extends React.Component<{}, { username: string, password: string,
                                 />
 
                                 <input
-                                    placeholder="email"
+                                    placeholder={t('email')}
                                     type="email"
                                     required
                                     value={email}
@@ -60,7 +63,7 @@ class Register extends React.Component<{}, { username: string, password: string,
                                 />
 
                                 <input
-                                    placeholder="password"
+                                    placeholder={t('password')}
                                     type="password"
                                     required
                                     value={password}
@@ -71,7 +74,7 @@ class Register extends React.Component<{}, { username: string, password: string,
                                     type="submit"
                                     disabled={!allPass([username, password, email]).valueOf()}
                                 >
-                            Register
+                                    {t('register')}
                                 </button>
                                 {error && <div className="error"> {formatError(error)} </div>}
                             </form>
@@ -93,4 +96,4 @@ const CREATE_USER = gql`
 
 `;
 
-export default Register;
+export default translate()(Register);

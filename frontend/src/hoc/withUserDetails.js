@@ -6,7 +6,7 @@ import { Query } from 'react-apollo';
 import Loading from '../components/loading';
 import { errorHandler } from '../helpers/errorHandler';
 
-const withUserDetails = (Component: *) => () => (
+const withUserDetails = (Component: *) => ({ ...props }) => (
     <Query
         query={ITEMS_QUERY}
         onError={errorHandler}
@@ -14,7 +14,7 @@ const withUserDetails = (Component: *) => () => (
     >
         {({ error, loading, data }) => {
             if (loading) return <Loading />;
-            return <Component me={error ? data : data.me} />;
+            return <Component me={error ? data : data.me} {...props} />;
         }}
     </Query>
 );

@@ -8,12 +8,13 @@ import All from 'crocks/All';
 import mconcat from 'crocks/helpers/mconcat';
 import { client } from '../state';
 import { errorHandler } from '../helpers/errorHandler';
+import { translate } from 'react-i18next';
 
 const allPass = mconcat(All);
 
 const formatError = message => message.message.replace('GraphQL error:', '');
 
-class Register extends React.Component<{}, { username: string, password: string } > {
+class Register extends React.Component<{t: string => string}, { username: string, password: string } > {
     state = {
         username: '',
         password: '',
@@ -21,6 +22,8 @@ class Register extends React.Component<{}, { username: string, password: string 
 
     render() {
         const { username, password } = this.state;
+        const { t } = this.props;
+
         return (
             <Mutation
                 mutation={LOGIN}
@@ -46,7 +49,7 @@ class Register extends React.Component<{}, { username: string, password: string 
                             >
 
                                 <input
-                                    placeholder="username"
+                                    placeholder={t('username')}
                                     name="username"
                                     value={username}
                                     required
@@ -54,7 +57,7 @@ class Register extends React.Component<{}, { username: string, password: string 
                                 />
 
                                 <input
-                                    placeholder="password"
+                                    placeholder={t('password')}
                                     type="password"
                                     required
                                     value={password}
@@ -65,7 +68,7 @@ class Register extends React.Component<{}, { username: string, password: string 
                                     type="submit"
                                     disabled={!allPass([username, password]).valueOf()}
                                 >
-                                    Login
+                                    {t('login')}
                                 </button>
                                 {error && <div className="error"> {formatError(error)} </div>}
                             </form>
@@ -86,4 +89,4 @@ const LOGIN = gql`
   }
 `;
 
-export default Register;
+export default translate()(Register);
