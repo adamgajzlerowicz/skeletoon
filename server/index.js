@@ -12,5 +12,6 @@ const server = new GraphQLServer({
     resolvers: resolvers(withAuth),
     context: req => ({ ...req, db: connection, token: req.request.headers.token }),
 });
+
 // eslint-disable-next-line
 server.start(options, () => console.log(`Server is running on localhost:${options.port}`));

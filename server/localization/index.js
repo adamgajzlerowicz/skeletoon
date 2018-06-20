@@ -23,12 +23,12 @@ const i18 = i18next.init({
         },
         pl: {
             translation: {
-                [INCORRECT_DETAILS_ERROR]: 'Incorrect credentials.',
-                [USERNAME_TOO_SHORT_ERROR]: 'Username is too short.',
-                [INCORRECT_EMAIL_ERROR]: 'Email is incorrect.',
-                [WEAK_PASSWORD_ERROR]: 'Password is not strong enough.',
-                [EMAIL_IN_USE_ERROR]: 'Email is already taken.',
-                [USERNAME_IN_USE_ERROR]: 'User name is already taken.',
+                [INCORRECT_DETAILS_ERROR]: 'Niepoprawny login.',
+                [USERNAME_TOO_SHORT_ERROR]: 'Nazwa użytkownika jest zbyt krótka.',
+                [INCORRECT_EMAIL_ERROR]: 'Niepoprawny format adresu email.',
+                [WEAK_PASSWORD_ERROR]: 'Hasło jest zbyt słabe.',
+                [EMAIL_IN_USE_ERROR]: 'Ten adres email jest zajęty.',
+                [USERNAME_IN_USE_ERROR]: 'Ta nazwa użytkownika jest zajęta.',
             },
         },
     },

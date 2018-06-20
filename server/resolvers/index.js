@@ -14,7 +14,6 @@ import {
 } from '../localization';
 
 
-
 const resolvers = withAuth => ({
     Query: {
         users: withAuth(resolver(User)),
@@ -33,7 +32,7 @@ const resolvers = withAuth => ({
                 const valid = bcrypt.compareSync(data.password, entity.dataValues.password_hash);
 
                 if (!valid) {
-                    rej(new Error(INCORRECT_DETAILS_ERROR));
+                    rej(new Error(t.t(INCORRECT_DETAILS_ERROR)));
                 }
 
                 const { username, email, id } = entity.dataValues;
@@ -43,15 +42,15 @@ const resolvers = withAuth => ({
         }),
         createUser: (_, data) => {
             if (data.username.length < 5) {
-                throw new Error(t.key(USERNAME_TOO_SHORT_ERROR));
+                throw new Error(t.t(USERNAME_TOO_SHORT_ERROR));
             }
 
             if (!validateEmail(data.email)) {
-                throw new Error(t.key(INCORRECT_EMAIL_ERROR));
+                throw new Error(t.t(INCORRECT_EMAIL_ERROR));
             }
 
             if (!isStrongPassword(data.password)) {
-                throw new Error(t.key(WEAK_PASSWORD_ERROR));
+                throw new Error(t.t(WEAK_PASSWORD_ERROR));
             }
             return new Promise((res, rej) => {
                 const emailPromise = User.findOne({ where: { email: data.email } });
@@ -59,11 +58,11 @@ const resolvers = withAuth => ({
 
                 return Promise.all([emailPromise, usernamePromise]).then((validation) => {
                     if (validation[0] && validation[0].dataValues) {
-                        rej(new Error(t.key(EMAIL_IN_USE_ERROR)));
+                        rej(new Error(t.t(EMAIL_IN_USE_ERROR)));
                     }
 
                     if (validation[1] && validation[1].dataValues) {
-                        rej(new Error(t.key(USERNAME_IN_USE_ERROR)));
+                        rej(new Error(t.t(USERNAME_IN_USE_ERROR)));
                     }
 
                     User.create(data)
