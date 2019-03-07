@@ -2,7 +2,7 @@
 	"scripts": {
 		"test": "cross-env HASH=J34j$jvBU*4Q%Qdt%84@ jest ./src --watch",
 		"test-once": "cross-env HASH=J34j$jvBU*4Q%Qdt%84@ jest --coverage --detectOpenHandles",
-		"start": "yarn docker; cross-env HASH=34j$jvBU*4Q%Qdt%84@%Ev%Qdt%84@ nodemon index.js --exec babel-node --presets es2015,stage-2",
+		"start": "npm run docker; cross-env HASH=34j$jvBU*4Q%Qdt%84@%Ev%Qdt%84@ nodemon index.js --exec babel-node --presets es2015,stage-2",
 		"seed": "nodemon seed.js --exec babel-node --presets es2015,stage-2",
 		"lint": "eslint . --ext .js --fix",
 		"docker": "docker restart skeletoon",

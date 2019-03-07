@@ -5,6 +5,12 @@
 cd server
 yarn install
 yarn docker
+
+docker exec -it skeletoon bash
+su postgres
+psql
+CREATE DATABASE skeletoon;
+
 yarn seed # create database structure. Once seeded, stop the process
 yarn start
 ```
